@@ -12,7 +12,7 @@ input,select{padding:.7rem;border:1px solid #bdb4a5;background:#fff;border-radiu
 main{padding:2rem 6vw 5rem}.summary{color:var(--muted);margin-bottom:1.4rem}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
 .card{background:var(--card);border:1px solid #d8d0c2;padding:1rem;border-radius:6px}.cover{aspect-ratio:1;background:#ded6c7;display:grid;place-items:center;color:#777;margin-bottom:1rem;text-align:center;padding:1rem}
 .artist{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent)}h2{font-size:1.25rem;margin:.3rem 0}.meta{font-size:.9rem;color:var(--muted)}.price{font-size:1.2rem;margin:.7rem 0}
-a{color:var(--accent)}.empty{padding:3rem 0}
+a{color:var(--accent)}.card:has(.price){transition:transform .15s ease,box-shadow .15s ease}.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08)}.empty{padding:3rem 0}
 </style>
 </head>
 <body>
@@ -27,12 +27,13 @@ a{color:var(--accent)}.empty{padding:3rem 0}
 <option value="popularity">Popularity / demand</option>
 </select>
 </div>
-<main><div id="summary" class="summary"></div><div id="grid" class="grid"></div></main>
+<main><section id="featured"></section><div id="summary" class="summary"></div><div id="grid" class="grid"></div></main>
 <script src="records.js"></script>
 <script>
-const records=(window.RECORDS||[]);
+const records=(window.RECORDS||[]); const featured=document.querySelector('#featured');
 const q=document.querySelector('#q'), genre=document.querySelector('#genre'), sort=document.querySelector('#sort'), grid=document.querySelector('#grid'), summary=document.querySelector('#summary');
 [...new Set(records.map(r=>r.genre).filter(Boolean))].sort().forEach(g=>genre.add(new Option(g,g)));
+function featuredRender(){const picks=records.filter(r=>r.featured).sort((a,b)=>(b.value||0)-(a.value||0)).slice(0,8);featured.innerHTML='<h2 style="font-size:1.8rem">Featured & High-Value Records</h2><p class="summary">Highlights from the collection based on current estimated value. Popularity/demand data will be shown separately as verified Discogs collection and wantlist metadata is added.</p><div class="grid" style="margin-bottom:2.5rem">'+picks.map(r=>`<article class="card"><div class="artist">${r.artist||'Unknown artist'}</div><h2>${r.title||'Untitled'}</h2><div class="meta">${r.genre||''}</div><div class="price">${Number(r.value).toFixed(2)}</div>${r.url?`<a href="${r.url}" target="_blank" rel="noopener">Release details</a>`:''}</article>`).join('')+'</div>';} featuredRender();
 function render(){
  const term=q.value.trim().toLowerCase();
  let a=records.filter(r=>(!genre.value||r.genre===genre.value)&&(!term||Object.values(r).join(' ').toLowerCase().includes(term)));
