@@ -13,13 +13,13 @@ header:after{content:"";position:absolute;width:260px;height:260px;border:52px s
 header p{color:rgba(255,255,255,.9);max-width:760px}.theme-toggle{position:absolute;right:6vw;bottom:1.2rem;z-index:2;border:1px solid rgba(255,255,255,.55);background:rgba(255,255,255,.16);color:#fff;border-radius:999px;padding:.6rem 1rem;cursor:pointer;font:inherit}.controls{position:sticky;top:0;z-index:5;padding:1rem 6vw;background:color-mix(in srgb,var(--paper) 94%,transparent);border-bottom:1px solid var(--line);display:flex;gap:.6rem;flex-wrap:wrap}
 input,select{padding:.7rem;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:4px;font:inherit}input{flex:1;min-width:220px}
 main{padding:2rem 6vw 5rem}.summary{color:var(--muted);margin-bottom:1.4rem}
-.grid{display:flex;gap:0;overflow-x:auto;overflow-y:visible;padding:2.5rem 3rem 3.5rem 1rem;scroll-snap-type:x proximity;scroll-behavior:smooth;perspective:1100px;perspective-origin:center;scrollbar-width:thin}
-.grid::-webkit-scrollbar{height:10px}.grid::-webkit-scrollbar-thumb{background:var(--line);border-radius:20px}
-.grid .card{flex:0 0 clamp(175px,18vw,225px);margin-right:-34px;scroll-snap-align:center;transform-origin:center bottom;transform:rotateY(14deg) translateZ(-18px);box-shadow:-12px 15px 28px rgba(0,0,0,.16);position:relative}
-.grid .card:nth-child(even){transform:rotateY(10deg) translateZ(-10px)}
-.grid .card:hover,.grid .card:focus-within{transform:rotateY(0deg) translateY(-12px) translateZ(65px) scale(1.06);z-index:20;box-shadow:0 28px 55px rgba(0,0,0,.28)}
-.grid .card:hover + .card{transform:rotateY(18deg) translateX(34px) translateZ(-25px)}
-@media(max-width:650px){.grid{padding-left:.25rem;padding-right:2rem}.grid .card{flex-basis:62vw;margin-right:-24px}}
+.genre-section{margin:2.2rem 0}.genre-head{display:flex;align-items:baseline;gap:.7rem;margin-bottom:.25rem}.genre-head h2{font-size:1.45rem;margin:0}.genre-count{font-size:.8rem;color:var(--muted)}
+.grid{display:flex;gap:.55rem;overflow-x:auto;padding:.8rem .25rem 1.2rem;scroll-behavior:smooth;scroll-snap-type:x proximity;scrollbar-width:thin}
+.grid::-webkit-scrollbar{height:8px}.grid::-webkit-scrollbar-thumb{background:var(--line);border-radius:20px}
+.grid .card{flex:0 0 132px;scroll-snap-align:start;padding:.45rem;box-shadow:0 5px 14px rgba(0,0,0,.1);transform:none}
+.grid .card:hover,.grid .card:focus-within{transform:translateY(-5px) scale(1.04);z-index:10;box-shadow:0 12px 24px rgba(0,0,0,.18)}
+.grid .cover{margin-bottom:.45rem;padding:.35rem}.grid .artist{font-size:.61rem}.grid h2{font-size:.8rem;line-height:1.08;margin:.18rem 0}.grid .meta{font-size:.68rem;line-height:1.2}.grid .price{font-size:.82rem;margin:.3rem 0}.grid a{font-size:.68rem}
+@media(max-width:650px){.grid .card{flex-basis:112px}.grid{gap:.4rem}}
 .card{background:var(--card);border:1px solid var(--line);padding:1rem;border-radius:7px;transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s ease;backface-visibility:hidden}.cover{aspect-ratio:1;background:linear-gradient(135deg,color-mix(in srgb,var(--accent3) 28%,var(--card)),color-mix(in srgb,var(--accent2) 22%,var(--card)));display:grid;place-items:center;color:#777;margin-bottom:1rem;text-align:center;padding:1rem}
 .intro{padding:1rem 0 1.5rem}.intro h2{font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:.4rem}.badge{display:inline-block;padding:.25rem .55rem;border-radius:999px;background:color-mix(in srgb,var(--accent3) 30%,var(--card));font-size:.75rem;margin-bottom:.5rem}.artist{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent)}h2{font-size:1.25rem;margin:.3rem 0}.meta{font-size:.9rem;color:var(--muted)}.price{font-size:1.2rem;margin:.7rem 0}
 a{color:var(--accent)}.empty{padding:3rem 0}.shelf-label{font-size:.82rem;color:var(--muted);margin-top:-.6rem;margin-bottom:.4rem}
@@ -40,7 +40,7 @@ a{color:var(--accent)}.empty{padding:3rem 0}.shelf-label{font-size:.82rem;color:
 <main>
 <section class="intro"><h2>Browse the Collection</h2><p class="summary">Search the complete catalog, explore genres, compare condition and estimated values, and follow release-reference links for pressing details.</p></section>
 <section id="featured"></section>
-<section><h2 style="font-size:1.8rem;margin-top:2rem">Complete Catalog</h2><div id="summary" class="summary"></div><div class="shelf-label">← Scroll sideways to flip through the records →</div><div id="grid" class="grid"></div></section>
+<section><h2 style="font-size:1.8rem;margin-top:2rem">Browse by Genre</h2><div id="summary" class="summary"></div><div class="shelf-label">Each genre has its own row. Scroll sideways within a row →</div><div id="grid"></div></section>
 <footer style="margin-top:4rem;padding-top:2rem;border-top:1px solid var(--line)"><strong>Keith Terry Record Collection</strong><p class="summary">Inventory, grading and valuations are works in progress. Release links are references and do not necessarily represent active listings.</p></footer>
 </main>
 <script src="records.js"></script>
@@ -52,13 +52,15 @@ setTheme(localStorage.getItem('theme')||'light');themeToggle.addEventListener('c
 const q=document.querySelector('#q'), genre=document.querySelector('#genre'), sort=document.querySelector('#sort'), grid=document.querySelector('#grid'), summary=document.querySelector('#summary');
 [...new Set(records.map(r=>r.genre).filter(Boolean))].sort().forEach(g=>genre.add(new Option(g,g)));
 function featuredRender(){const picks=records.filter(r=>r.featured).sort((a,b)=>(b.value||0)-(a.value||0)).slice(0,12);featured.innerHTML='<h2 style="font-size:1.8rem">Featured & High-Value Records</h2><p class="summary">Highlights from the collection based on current estimated value. Popularity/demand data will be shown separately as verified Discogs collection and wantlist metadata is added.</p><div class="grid" style="margin-bottom:2.5rem">'+picks.map(r=>`<article class="card"><span class="badge">Featured · High Value</span><div class="artist">${r.artist||'Unknown artist'}</div><h2>${r.title||'Untitled'}</h2><div class="meta">${r.genre||''}</div><div class="price">${Number(r.value).toFixed(2)}</div>${r.url?`<a href="${r.url}" target="_blank" rel="noopener">Release details</a>`:''}</article>`).join('')+'</div>';} featuredRender();
+function card(r){return `<article class="card"><div class="cover">${r.cover?`<img src="${r.cover}" alt="" style="width:100%;height:100%;object-fit:cover">`:'Cover'}</div><div class="artist">${r.artist||'Unknown artist'}</div><h2>${r.title||'Untitled'}</h2><div class="meta">${[r.year,r.label].filter(Boolean).join(' · ')}</div><div class="price">${r.value!=null?'$'+Number(r.value).toFixed(2):'—'}</div>${r.url?`<a href="${r.url}" target="_blank" rel="noopener">Details</a>`:''}</article>`}
 function render(){
  const term=q.value.trim().toLowerCase();
  let a=records.filter(r=>(!genre.value||r.genre===genre.value)&&(!term||Object.values(r).join(' ').toLowerCase().includes(term)));
- const s=sort.value;
- a.sort((x,y)=>s==='artist'?(x.artist||'').localeCompare(y.artist||''):s==='title'?(x.title||'').localeCompare(y.title||''):s==='year-desc'?(y.year||0)-(x.year||0):s==='year-asc'?(x.year||9999)-(y.year||9999):s==='value-desc'?(y.value||0)-(x.value||0):s==='value-asc'?(x.value??Infinity)-(y.value??Infinity):(y.popularity||0)-(x.popularity||0));
- summary.textContent=a.length+' record'+(a.length===1?'':'s')+' shown';
- grid.innerHTML=a.length?a.map(r=>`<article class="card"><div class="cover">${r.cover?`<img src="${r.cover}" alt="" style="width:100%;height:100%;object-fit:cover">`:'Cover image coming soon'}</div><div class="artist">${r.artist||'Unknown artist'}</div><h2>${r.title||'Untitled'}</h2><div class="meta">${[r.genre,r.year,r.label,r.catalog].filter(Boolean).join(' · ')}</div><div class="meta">Media: ${r.media||'—'} · Sleeve: ${r.sleeve||'—'}</div><div class="price">${r.value!=null?'$'+Number(r.value).toFixed(2):'Price pending'}</div>${r.url?`<a href="${r.url}" target="_blank" rel="noopener">Release details</a>`:''}</article>`).join(''):'<div class="empty">No records match those filters.</div>';
-}
-[q,genre,sort].forEach(el=>el.addEventListener('input',render));render();
-</script></body></html>
+ const alpha=sort.value==='artist';
+ const groups=[...new Set(a.map(r=>r.genre||'Other / To Be Classified'))].sort();
+ summary.textContent=a.length+' record'+(a.length===1?'':'s')+' shown · '+(alpha?'alphabetical within each genre':'most valuable to least valuable');
+ grid.innerHTML=groups.map(g=>{
+   const rows=a.filter(r=>(r.genre||'Other / To Be Classified')===g).sort((x,y)=>alpha?(x.artist||'').localeCompare(y.artist||''):(y.value??-1)-(x.value??-1));
+   return `<section class="genre-section"><div class="genre-head"><h2>${g}</h2><span class="genre-count">${rows.length} records</span></div><div class="grid">${rows.map(card).join('')}</div></section>`;
+ }).join('')||'<div class="empty">No records match those filters.</div>';
+}>
