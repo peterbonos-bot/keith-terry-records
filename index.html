@@ -4,19 +4,22 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Keith Terry Record Collection</title>
 <style>
-:root{--ink:#191713;--paper:#f4efe5;--card:#fffaf0;--accent:#9b3d25;--muted:#70695f}
-*{box-sizing:border-box}body{margin:0;font-family:Georgia,serif;background:var(--paper);color:var(--ink)}
-header{padding:3rem 6vw 2rem;background:#201e1a;color:#fff}h1{margin:.2rem 0;font-size:clamp(2rem,5vw,4.5rem)}
-header p{color:#d8d0c2;max-width:760px}.controls{position:sticky;top:0;z-index:5;padding:1rem 6vw;background:rgba(244,239,229,.96);border-bottom:1px solid #d8d0c2;display:flex;gap:.6rem;flex-wrap:wrap}
-input,select{padding:.7rem;border:1px solid #bdb4a5;background:#fff;border-radius:4px;font:inherit}input{flex:1;min-width:220px}
+:root{--ink:#243047;--paper:#fff8e7;--card:#fffdf7;--accent:#d94f35;--accent2:#177e89;--accent3:#e9a23b;--muted:#657084;--line:#e7cfa4}
+[data-theme="dark"]{--ink:#f6efe3;--paper:#11151b;--card:#191f27;--accent:#ff7a45;--accent2:#65c6c9;--accent3:#f2bd58;--muted:#aeb7c3;--line:#303844}
+*{box-sizing:border-box}body{margin:0;font-family:Georgia,serif;background:linear-gradient(135deg,var(--paper),color-mix(in srgb,var(--paper) 85%,#b8e3dc));color:var(--ink);min-height:100vh}
+header{padding:3rem 6vw 2rem;background:linear-gradient(120deg,#ef6a43,#e6a43a 48%,#238b8e);color:#fff;position:relative;overflow:hidden}
+[data-theme="dark"] header{background:linear-gradient(120deg,#141920,#222832 60%,#172b2c)}
+header:after{content:"";position:absolute;width:260px;height:260px;border:52px solid rgba(255,255,255,.12);border-radius:50%;right:6vw;top:-105px}h1{margin:.2rem 0;font-size:clamp(2rem,5vw,4.5rem)}
+header p{color:rgba(255,255,255,.9);max-width:760px}.theme-toggle{position:absolute;right:6vw;bottom:1.2rem;z-index:2;border:1px solid rgba(255,255,255,.55);background:rgba(255,255,255,.16);color:#fff;border-radius:999px;padding:.6rem 1rem;cursor:pointer;font:inherit}.controls{position:sticky;top:0;z-index:5;padding:1rem 6vw;background:color-mix(in srgb,var(--paper) 94%,transparent);border-bottom:1px solid var(--line);display:flex;gap:.6rem;flex-wrap:wrap}
+input,select{padding:.7rem;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:4px;font:inherit}input{flex:1;min-width:220px}
 main{padding:2rem 6vw 5rem}.summary{color:var(--muted);margin-bottom:1.4rem}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
-.card{background:var(--card);border:1px solid #d8d0c2;padding:1rem;border-radius:6px}.cover{aspect-ratio:1;background:#ded6c7;display:grid;place-items:center;color:#777;margin-bottom:1rem;text-align:center;padding:1rem}
+.card{background:var(--card);border:1px solid var(--line);padding:1rem;border-radius:6px}.cover{aspect-ratio:1;background:linear-gradient(135deg,color-mix(in srgb,var(--accent3) 28%,var(--card)),color-mix(in srgb,var(--accent2) 22%,var(--card)));display:grid;place-items:center;color:#777;margin-bottom:1rem;text-align:center;padding:1rem}
 .artist{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent)}h2{font-size:1.25rem;margin:.3rem 0}.meta{font-size:.9rem;color:var(--muted)}.price{font-size:1.2rem;margin:.7rem 0}
 a{color:var(--accent)}.card:has(.price){transition:transform .15s ease,box-shadow .15s ease}.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08)}.empty{padding:3rem 0}
 </style>
 </head>
 <body>
-<header><div class="artist">Vinyl collection</div><h1>Keith Terry Records</h1><p>Browse the collection by genre, artist, year, value, condition and popularity. Search across artist, album, genre, label, catalog number and notes.</p></header>
+<header><div class="artist" style="color:#fff">Vinyl collection</div><h1>Keith Terry Record Collection</h1><p>Browse the collection by genre, artist, year, value, condition and popularity. Search across artist, album, genre, label, catalog number and notes.</p><button class="theme-toggle" id="themeToggle" type="button">☾ Dark mode</button></header>
 <div class="controls">
 <input id="q" type="search" placeholder="Search artist, album, genre, label…">
 <select id="genre"><option value="">All genres</option></select>
@@ -31,6 +34,9 @@ a{color:var(--accent)}.card:has(.price){transition:transform .15s ease,box-shado
 <script src="records.js"></script>
 <script>
 const records=(window.RECORDS||[]); const featured=document.querySelector('#featured');
+const themeToggle=document.querySelector('#themeToggle');
+function setTheme(t){document.documentElement.dataset.theme=t;themeToggle.textContent=t==='dark'?'☀ Light mode':'☾ Dark mode';localStorage.setItem('theme',t)}
+setTheme(localStorage.getItem('theme')||'light');themeToggle.addEventListener('click',()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark'));
 const q=document.querySelector('#q'), genre=document.querySelector('#genre'), sort=document.querySelector('#sort'), grid=document.querySelector('#grid'), summary=document.querySelector('#summary');
 [...new Set(records.map(r=>r.genre).filter(Boolean))].sort().forEach(g=>genre.add(new Option(g,g)));
 function featuredRender(){const picks=records.filter(r=>r.featured).sort((a,b)=>(b.value||0)-(a.value||0)).slice(0,8);featured.innerHTML='<h2 style="font-size:1.8rem">Featured & High-Value Records</h2><p class="summary">Highlights from the collection based on current estimated value. Popularity/demand data will be shown separately as verified Discogs collection and wantlist metadata is added.</p><div class="grid" style="margin-bottom:2.5rem">'+picks.map(r=>`<article class="card"><div class="artist">${r.artist||'Unknown artist'}</div><h2>${r.title||'Untitled'}</h2><div class="meta">${r.genre||''}</div><div class="price">${Number(r.value).toFixed(2)}</div>${r.url?`<a href="${r.url}" target="_blank" rel="noopener">Release details</a>`:''}</article>`).join('')+'</div>';} featuredRender();
