@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Keith Terry Record Collection</title>
+<style>
+:root{--ink:#191713;--paper:#f4efe5;--card:#fffaf0;--accent:#9b3d25;--muted:#70695f}
+*{box-sizing:border-box}body{margin:0;font-family:Georgia,serif;background:var(--paper);color:var(--ink)}
+header{padding:3rem 6vw 2rem;background:#201e1a;color:#fff}h1{margin:.2rem 0;font-size:clamp(2rem,5vw,4.5rem)}
+header p{color:#d8d0c2;max-width:760px}.controls{position:sticky;top:0;z-index:5;padding:1rem 6vw;background:rgba(244,239,229,.96);border-bottom:1px solid #d8d0c2;display:flex;gap:.6rem;flex-wrap:wrap}
+input,select{padding:.7rem;border:1px solid #bdb4a5;background:#fff;border-radius:4px;font:inherit}input{flex:1;min-width:220px}
+main{padding:2rem 6vw 5rem}.summary{color:var(--muted);margin-bottom:1.4rem}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
+.card{background:var(--card);border:1px solid #d8d0c2;padding:1rem;border-radius:6px}.cover{aspect-ratio:1;background:#ded6c7;display:grid;place-items:center;color:#777;margin-bottom:1rem;text-align:center;padding:1rem}
+.artist{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent)}h2{font-size:1.25rem;margin:.3rem 0}.meta{font-size:.9rem;color:var(--muted)}.price{font-size:1.2rem;margin:.7rem 0}
+a{color:var(--accent)}.empty{padding:3rem 0}
+</style>
+</head>
+<body>
+<header><div class="artist">Vinyl collection</div><h1>Keith Terry Records</h1><p>Browse the collection by genre, artist, year, value, condition and popularity. Search across artist, album, genre, label, catalog number and notes.</p></header>
+<div class="controls">
+<input id="q" type="search" placeholder="Search artist, album, genre, label…">
+<select id="genre"><option value="">All genres</option></select>
+<select id="sort">
+<option value="artist">Artist A–Z</option><option value="title">Album A–Z</option>
+<option value="year-desc">Year: newest</option><option value="year-asc">Year: oldest</option>
+<option value="value-desc">Value: high to low</option><option value="value-asc">Value: low to high</option>
+<option value="popularity">Popularity / demand</option>
+</select>
+</div>
+<main><div id="summary" class="summary"></div><div id="grid" class="grid"></div></main>
+<script src="records.js"></script>
+<script>
+const records=(window.RECORDS||[]);
+const q=document.querySelector('#q'), genre=document.querySelector('#genre'), sort=document.querySelector('#sort'), grid=document.querySelector('#grid'), summary=document.querySelector('#summary');
+[...new Set(records.map(r=>r.genre).filter(Boolean))].sort().forEach(g=>genre.add(new Option(g,g)));
+function render(){
+ const term=q.value.trim().toLowerCase();
+ let a=records.filter(r=>(!genre.value||r.genre===genre.value)&&(!term||Object.values(r).join(' ').toLowerCase().includes(term)));
+ const s=sort.value;
+ a.sort((x,y)=>s==='artist'?(x.artist||'').localeCompare(y.artist||''):s==='title'?(x.title||'').localeCompare(y.title||''):s==='year-desc'?(y.year||0)-(x.year||0):s==='year-asc'?(x.year||9999)-(y.year||9999):s==='value-desc'?(y.value||0)-(x.value||0):s==='value-asc'?(x.value??Infinity)-(y.value??Infinity):(y.popularity||0)-(x.popularity||0));
+ summary.textContent=a.length+' record'+(a.length===1?'':'s')+' shown';
+ grid.innerHTML=a.length?a.map(r=>`<article class="card"><div class="cover">${r.cover?`<img src="${r.cover}" alt="" style="width:100%;height:100%;object-fit:cover">`:'Cover image coming soon'}</div><div class="artist">${r.artist||'Unknown artist'}</div><h2>${r.title||'Untitled'}</h2><div class="meta">${[r.genre,r.year,r.label,r.catalog].filter(Boolean).join(' · ')}</div><div class="meta">Media: ${r.media||'—'} · Sleeve: ${r.sleeve||'—'}</div><div class="price">${r.value!=null?'$'+Number(r.value).toFixed(2):'Price pending'}</div>${r.url?`<a href="${r.url}" target="_blank" rel="noopener">Release details</a>`:''}</article>`).join(''):'<div class="empty">No records match those filters.</div>';
+}
+[q,genre,sort].forEach(el=>el.addEventListener('input',render));render();
+</script></body></html>
