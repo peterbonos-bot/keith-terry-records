@@ -1,0 +1,13 @@
+// Storefront inventory. More records and verified online metadata will be added progressively.
+window.RECORDS = [
+ {artist:"Steve Reich",title:"Drumming, Music for Mallet Instruments, Voices and Organ, Six Pianos",genre:"Classical & Contemporary",year:1974,value:127.01,sleeve:"VG",media:"NM",label:"Deutsche Grammophon",url:"https://www.discogs.com/release/249712-Steve-Reich-Drumming-Music-For-Mallet-Instruments-Voices-And-Organ-Six-Pianos",popularity:0},
+ {artist:"Pharoah Sanders",title:"Heart Is a Melody",genre:"Jazz",value:110,sleeve:"VG+",media:"VG+",url:"https://www.discogs.com/sell/post/1148102",popularity:0},
+ {artist:"John Coltrane",title:"Expression",genre:"Jazz",year:1967,value:109.87,sleeve:"VG+",media:"VG+",label:"Impulse!",catalog:"AS-9120",url:"https://www.discogs.com/release/1045223-John-Coltrane-Expression",popularity:0},
+ {artist:"The Beatles",title:"Meet the Beatles!",genre:"Rock & Pop",year:1964,value:105,sleeve:"VG",media:"VG",label:"Capitol",catalog:"T-2047",url:"https://www.discogs.com/release/833736-The-Beatles-Meet-The-Beatles",popularity:0},
+ {artist:"Fela & the Africa '70",title:"Question Jam Answer, Vol. 2",genre:"World & Traditional",value:93,sleeve:"VG",media:"VG",url:"https://www.discogs.com/release/10598956-Fela-The-Africa-70-Music-Of-Fela-Roforofo-Fight",popularity:0},
+ {artist:"Miles Davis",title:"Kind of Blue",genre:"Jazz",year:1959,value:49,sleeve:"VG",media:"VG+",label:"Columbia",url:"https://www.discogs.com/release/17400106-Miles-Davis-Kind-Of-Blue",popularity:0},
+ {artist:"Billy Cobham",title:"Spectrum",genre:"Jazz",year:1973,value:39,sleeve:"VG+",media:"VG",label:"Atlantic",catalog:"SD 7268",url:"https://www.discogs.com/release/4388849-Billy-Cobham-Spectrum",popularity:0},
+ {artist:"Crosby, Stills, Nash & Young",title:"Déjà Vu",genre:"Rock & Pop",year:1970,value:30,sleeve:"VG+",media:"VG",label:"Atlantic",catalog:"SD-7200",url:"https://www.discogs.com/search/?q=Crosby%2C+Stills%2C+Nash+%26+Young+D%C3%A9j%C3%A0+Vu+Atlantic+SD-7200&type=release",popularity:0},
+ {artist:"Hozan Yamamoto",title:"Silver World",genre:"World & Traditional",value:40,sleeve:"VG+",media:"VG+",url:"https://www.discogs.com/release/4070980-%E5%B1%B1%E6%9C%AC%E9%82%A6%E5%B1%B1-%E9%8A%80%E7%95%8C-Silver-World",popularity:0},
+ {artist:"Carole King",title:"Tapestry",genre:"Rock & Pop",year:1971,value:10,sleeve:"VG",media:"G+",label:"Ode",catalog:"SP-77009",popularity:0}
+];
