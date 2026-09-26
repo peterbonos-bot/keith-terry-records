@@ -61,4 +61,11 @@ function render(){
    const rows=a.filter(r=>(r.genre||'Other / To Be Classified')===g).sort((x,y)=>alpha?(x.artist||'').localeCompare(y.artist||''):(y.value??-1)-(x.value??-1));
    return `<section class="genre-section"><div class="genre-head"><h2>${g}</h2><span class="genre-count">${rows.length} records</span></div><div class="grid">${rows.map(card).join('')}</div></section>`;
  }).join('')||'<div class="empty">No records match those filters.</div>';
-}>
+}
+q.addEventListener('input',render);
+genre.addEventListener('change',render);
+sort.addEventListener('change',render);
+render();
+</script>
+</body>
+</html>
