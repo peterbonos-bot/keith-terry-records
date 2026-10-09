@@ -28,10 +28,19 @@ a{color:var(--accent)}.empty{padding:3rem 0}.shelf-label{font-size:.82rem;color:
 header{background-image:linear-gradient(rgba(10,12,16,.48),rgba(10,12,16,.82)),url("Moody%20Vintage%20Vinyl%20Collection%20Collage.png");background-size:cover;background-position:center 38%;min-height:260px;display:flex;flex-direction:column;justify-content:flex-end}
 body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.055;background:repeating-radial-gradient(circle at 88% 15%,transparent 0 5px,#fff 5.5px 6px,transparent 6.5px 9px);z-index:-1}
 .genre-section{position:relative;overflow:hidden}.genre-section:after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:linear-gradient(90deg,#3b2619,#9a6438,#40281a);opacity:.75}
+
+/* Display the complete generated artwork without cropping it behind the header text. */
+header{display:block;min-height:0;padding:0;background:#11151b!important}
+header:after{display:none}
+.hero-art{display:block;width:100%;height:auto;max-height:520px;object-fit:contain;object-position:center;background:#11151b}
+.hero-copy{position:relative;padding:1.5rem 6vw 2rem;background:linear-gradient(120deg,#141920,#222832 60%,#172b2c)}
+.hero-copy h1{margin:.2rem 0}
+.hero-copy p{margin-bottom:0}
+@media(max-width:650px){.hero-copy{padding:1.25rem 5vw 1.8rem}.hero-art{max-height:none}}
 </style>
 </head>
 <body>
-<header><div class="artist" style="color:#fff">Vinyl collection</div><h1>Keith Terry Record Collection</h1><p>Browse the collection by genre, artist, year, value, condition and popularity. Search across artist, album, genre, label, catalog number and notes.</p><button class="theme-toggle" id="themeToggle" type="button">☾ Dark mode</button></header>
+<header><img class="hero-art" src="Moody%20Vintage%20Vinyl%20Collection%20Collage.png" alt="Vintage vinyl record collection collage"><div class="hero-copy"><div class="artist" style="color:#fff">Vinyl collection</div><h1>Keith Terry Record Collection</h1><p>Browse the collection by genre, artist, year, value, condition and popularity. Search across artist, album, genre, label, catalog number and notes.</p><button class="theme-toggle" id="themeToggle" type="button">☾ Dark mode</button></div></header>
 <div class="controls">
 <input id="q" type="search" placeholder="Search artist, album, genre, label…">
 <select id="genre"><option value="">All genres</option></select>
