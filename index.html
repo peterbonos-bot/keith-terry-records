@@ -83,7 +83,7 @@ function render(){
  }else{
   const groups=[...new Set(a.map(r=>r.genre||'Other / To Be Classified'))].sort();
   grid.innerHTML=groups.map(g=>{
-   const rows=a.filter(r=>(r.genre||'Other / To Be Classified')===g).sort(compare);
+   const rows=a.filter(r=>(r.genre||'Other / To Be Classified')===g).sort((x,y)=>{const xv=x.value==null||String(x.value).trim()===''?null:Number(x.value),yv=y.value==null||String(y.value).trim()===''?null:Number(y.value);return (Number.isFinite(yv)?yv:-Infinity)-(Number.isFinite(xv)?xv:-Infinity)||(x.artist||'').localeCompare(y.artist||'');});
    return '<section class="genre-section"><div class="genre-head"><h2>'+esc(g)+'</h2><span class="genre-count">'+rows.length+' records</span></div><div class="grid">'+rows.map(card).join('')+'</div></section>';
   }).join('')||'<div class="empty">No records match those filters.</div>';
  }
