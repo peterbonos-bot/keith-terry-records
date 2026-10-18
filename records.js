@@ -19,7 +19,7 @@ window.RECORDS = [
   {
     "artist": "Pharaoh Sanders",
     "title": "Heart is a Melody",
-    "value": 110,
+    "value": 100,
     "sleeve": "VG+",
     "media": "VG+",
     "url": "https://www.discogs.com/release/1148102",
@@ -35,7 +35,7 @@ window.RECORDS = [
   {
     "artist": "John Coltrane",
     "title": "Expression",
-    "value": 109.87,
+    "value": 100,
     "sleeve": "VG+",
     "media": "VG+",
     "url": "https://www.discogs.com/release/1045223-John-Coltrane-Expression",
@@ -147,7 +147,7 @@ window.RECORDS = [
   {
     "artist": "Joseph Bonner",
     "title": "Impressions of Copenhagen",
-    "value": 59,
+    "value": 70,
     "sleeve": "VG+",
     "media": "VG+",
     "url": "https://www.discogs.com/release/2388494",
@@ -257,7 +257,7 @@ window.RECORDS = [
   {
     "artist": "Miles Davis",
     "title": "Kind of Blue",
-    "value": 49,
+    "value": 68,
     "sleeve": "VG",
     "media": "VG+",
     "url": "https://www.discogs.com/release/17400106-Miles-Davis-Kind-Of-Blue",
@@ -465,7 +465,7 @@ window.RECORDS = [
   {
     "artist": "Billy Cobham",
     "title": "Crosswinds",
-    "value": 35,
+    "value": 33,
     "sleeve": "NM",
     "media": "VG+",
     "url": "https://www.discogs.com/release/537821-Billy-Cobham-Crosswinds",
@@ -560,7 +560,7 @@ window.RECORDS = [
   {
     "artist": "Lester Bowie Brass Fantasy",
     "title": "Avant Pop",
-    "value": 33,
+    "value": 30,
     "sleeve": "NM",
     "media": "NM",
     "url": "https://www.discogs.com/release/1642923-Lester-Bowie-Brass-Fantasy-Avant-Pop",
@@ -702,7 +702,7 @@ window.RECORDS = [
   {
     "artist": "Gary Burton, Chick Corea",
     "title": "Crystal Silence",
-    "value": 30,
+    "value": 15,
     "sleeve": "NM",
     "media": "VG+",
     "url": "https://www.discogs.com/release/10746238-Gary-Burton-Chick-Corea-Crystal-Silence",
@@ -893,7 +893,7 @@ window.RECORDS = [
   {
     "artist": "Paul Bley, Gary Peacock, Barry Altschul ",
     "title": "Japan Suite",
-    "value": 25.5,
+    "value": 25,
     "sleeve": "NM",
     "media": "VG+",
     "url": "https://www.discogs.com/release/21725101-Paul-Bley-Gary-Peacock-Barry-Altschul-Japan-Suite",
@@ -1368,7 +1368,7 @@ window.RECORDS = [
   {
     "artist": "Spike Jones",
     "title": "The Best of Spike Jones",
-    "value": 17,
+    "value": 8,
     "sleeve": "NM",
     "media": "VG+",
     "url": "https://www.discogs.com/release/1750288",
@@ -1654,7 +1654,7 @@ window.RECORDS = [
   {
     "artist": "Buddy Rich Big Band",
     "title": "Big Band Shout",
-    "value": 15,
+    "value": 20,
     "sleeve": "VG+",
     "media": "VG",
     "url": "https://www.discogs.com/search/?q=Buddy+Rich+Big+Band+Big+Band+Shout+Verve+V6-8712&type=release",
@@ -1699,7 +1699,7 @@ window.RECORDS = [
   {
     "artist": "John Coltrane",
     "title": "Coltrane Plays the Blues",
-    "value": 14,
+    "value": 20,
     "sleeve": "VG",
     "media": "VG",
     "url": "https://www.discogs.com/release/6745457-John-Coltrane-Coltrane-Plays-The-Blues",
@@ -1779,7 +1779,7 @@ window.RECORDS = [
   {
     "artist": "John Bergamo",
     "title": "On the Edge",
-    "value": 13.45,
+    "value": 15,
     "sleeve": "NM",
     "media": "VG",
     "url": "https://www.discogs.com/release/1408989",
@@ -3631,7 +3631,7 @@ window.RECORDS = [
   {
     "artist": "Chet Atkins",
     "title": "Down Home",
-    "value": 0,
+    "value": 5,
     "sleeve": "G",
     "media": "VG",
     "url": "https://www.discogs.com/release/9510363-Chet-Atkins-Down-Home",
@@ -3902,7 +3902,7 @@ window.RECORDS = [
   {
     "artist": "Burt Bacharach",
     "title": "Reach Out",
-    "value": null,
+    "value": 10,
     "sleeve": "VG+",
     "media": "VG",
     "url": "https://www.discogs.com/search/?q=Burt+Bacharach+Reach+Out+SP-4131&type=release",
@@ -4232,7 +4232,7 @@ window.RECORDS = [
   {
     "artist": "Al Hirt",
     "title": "The Best of Al Hirt",
-    "value": null,
+    "value": 6,
     "sleeve": "",
     "media": "",
     "url": "https://www.discogs.com/search/?q=Al+Hirt+The+Best+of+Al+Hirt+LSP-3309&type=release",
