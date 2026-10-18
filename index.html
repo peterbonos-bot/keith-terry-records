@@ -45,6 +45,10 @@ header:after{display:none}
 .cart-panel{width:min(680px,100%);max-height:90vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.2rem;color:var(--ink)}
 .cart-header{display:flex;justify-content:space-between;align-items:center;gap:1rem}.cart-header h2{margin:0}.cart-close{background:transparent;border:1px solid var(--line);border-radius:5px;color:var(--ink);font:inherit;padding:.3rem .65rem;cursor:pointer}
 .cart-row{display:flex;justify-content:space-between;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--line)}.cart-row button{background:transparent;color:var(--accent);border:0;text-decoration:underline;cursor:pointer}.cart-total{font-size:1.3rem;font-weight:bold;text-align:right;margin:1rem 0}.cart-actions{display:flex;gap:.5rem;flex-wrap:wrap}.cart-actions button:disabled{opacity:.5;cursor:default}.cart-note{font-size:.88rem;color:var(--muted)}.cart-panel input{width:100%;margin:.35rem 0 .8rem;min-width:0}
+
+.viewing-section{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:1.4rem;margin:2rem 0}
+.viewing-section p{color:var(--muted)}.viewing-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem 1rem}.viewing-form label{display:flex;flex-direction:column;gap:.3rem}.viewing-form input,.viewing-form textarea{width:100%;min-width:0;padding:.65rem;border:1px solid var(--line);border-radius:5px;background:var(--paper);color:var(--ink);font:inherit}.viewing-form textarea{min-height:100px;resize:vertical}.viewing-form .full{grid-column:1/-1}.viewing-form button,.viewing-link{display:inline-block;padding:.65rem 1rem;border-radius:5px;background:var(--accent2);color:#111;border:0;font:inherit;font-weight:bold;cursor:pointer;text-decoration:none}
+@media(max-width:600px){.viewing-form{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -53,6 +57,7 @@ header:after{display:none}
 <input id="q" type="search" placeholder="Search artist, album, genre, label…">
 <select id="genre"><option value="">All genres</option></select>
 <button id="viewToggle" type="button" aria-pressed="false">☰ List View</button>
+<a class="viewing-link" href="#requestViewing">Request a Viewing</a>
 <button class="cart-button" id="openCart" type="button">Review Request (<span id="cartCount">0</span>)</button>
 <select id="sort">
 <option value="artist">Artist A–Z</option><option value="title">Album A–Z</option>
@@ -65,6 +70,19 @@ header:after{display:none}
 <section class="intro"><h2>Browse the Collection</h2><p class="summary">Search the complete catalog, explore genres, compare condition and estimated values, and follow release-reference links for pressing details.</p></section>
 <section id="featured"></section>
 <section><h2 style="font-size:1.8rem;margin-top:2rem">Browse by Genre</h2><div id="summary" class="summary"></div><div class="shelf-label">Each genre has its own row. Scroll sideways within a row →</div><div id="grid"></div></section>
+<section class="viewing-section" id="requestViewing" aria-labelledby="viewingTitle">
+<h2 id="viewingTitle">Request an Appointment to View the Collection</h2>
+<p>Interested in browsing the records in person? Suggest a date and time. Visits are by appointment only and subject to confirmation. The collection's location will be provided after your appointment is arranged.</p>
+<form id="viewingForm" class="viewing-form">
+<label>Full name<input name="visitorName" autocomplete="name" required maxlength="120"></label>
+<label>Email address<input name="visitorEmail" type="email" autocomplete="email" required maxlength="254"></label>
+<label>Phone number (optional)<input name="visitorPhone" type="tel" autocomplete="tel" maxlength="40"></label>
+<label>Preferred date<input name="preferredDate" type="date" required></label>
+<label>Preferred time<input name="preferredTime" type="time" required></label>
+<label>Alternate date / time (optional)<input name="alternateTime" placeholder="e.g. Sunday afternoon" maxlength="120"></label>
+<label class="full">Records of interest / additional notes (optional)<textarea name="visitorNotes" maxlength="2000"></textarea></label>
+<div class="full"><button type="submit">Prepare Viewing Request Email</button><p class="cart-note" id="viewingHelp" role="status">This opens your email app with a request addressed to Keith Terry, and copies you and Peter. You must press Send in your email app. Your appointment is not confirmed until Keith responds.</p></div>
+</form></section>
 <footer style="margin-top:4rem;padding-top:2rem;border-top:1px solid var(--line)"><strong>Keith Terry Record Collection</strong><p class="summary">Inventory, grading and valuations are works in progress. Release links are references and do not necessarily represent active listings.</p></footer>
 </main>
 <div class="cart-modal" id="cartModal" hidden role="dialog" aria-modal="true" aria-labelledby="cartTitle">
@@ -147,6 +165,19 @@ q.addEventListener('input',render);
 genre.addEventListener('change',render);
 sort.addEventListener('change',render);
 render();
+const viewingForm=document.getElementById('viewingForm');
+viewingForm.elements.preferredDate.min=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);
+viewingForm.addEventListener('submit',event=>{
+ event.preventDefault();
+ if(!viewingForm.reportValidity())return;
+ const fields=new FormData(viewingForm);
+ const get=k=>String(fields.get(k)||'').trim();
+ const email=get('visitorEmail');
+ const body=['Keith Terry Record Collection — viewing appointment request','','Name: '+get('visitorName'),'Email: '+email,'Phone: '+(get('visitorPhone')||'Not provided'),'Preferred date: '+get('preferredDate'),'Preferred time: '+get('preferredTime'),'Alternative availability: '+(get('alternateTime')||'Not provided'),'Records of interest / notes: '+(get('visitorNotes')||'None'),'','Please let me know if an appointment can be arranged. I understand the date and time are subject to confirmation and the collection location will be shared after arrangements are made.'].join('\\n');
+ const p=new URLSearchParams({cc:'peterbonos@gmail.com,'+email,subject:'Request to view Keith Terry Record Collection — '+get('visitorName'),body});
+ window.location.href='mailto:keithterry@crosspulse.com?'+p.toString();
+ document.getElementById('viewingHelp').textContent='Your email app should open with the request. Please press Send there. The appointment is not yet confirmed.';
+});
 </script>
 </body>
 </html>
