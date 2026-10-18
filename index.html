@@ -172,7 +172,7 @@ render();
 </html>+total.toFixed(2),...(missing?['Plus '+missing+' item(s) with Value TBD — final total to be confirmed.']:[]),'','Shipping and handling costs will be determined later after consultation with Keith and are not included in this total.','This is a purchase request only. Please confirm availability, actual prices, shipping/handling and payment details before proceeding.'].join('\n');
 const subject='Record purchase request — '+name+' ('+cart.length+' records)';
 const params=new URLSearchParams({cc:'peterbonos@gmail.com,'+email,subject,body});
-window.location.href='mailto:info@crosspulse.com?'+params.toString();
+window.location.href='mailto:keithterry@crosspulse.com?'+params.toString();
 document.getElementById('cartInstructions').textContent='Your email app should open with the request. Review it and press Send to submit; the website does not send emails itself.';
 }
 document.getElementById('openCart').addEventListener('click',()=>{renderCart();document.getElementById('cartModal').hidden=false});
