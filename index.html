@@ -69,7 +69,7 @@ header:after{display:none}
 </main>
 <div class="cart-modal" id="cartModal" hidden role="dialog" aria-modal="true" aria-labelledby="cartTitle">
 <div class="cart-panel"><div class="cart-header"><h2 id="cartTitle">Purchase request cart</h2><button class="cart-close" id="closeCart" type="button" aria-label="Close cart">✕</button></div>
-<p class="cart-note">This is a request to purchase, not a checkout. No payment will be taken. Prices are estimates and availability will be confirmed by Keith. Shipping and handling costs will be determined later after consultation with Keith and are not included in the estimated total.</p>
+<p class="cart-note">This is a request to purchase, not a checkout. No payment will be taken. Prices are estimates and availability will be confirmed by Keith. Shipping and handling costs will be determined later after consultation with the owner and are not included in the estimated total.</p>
 <div id="cartItems"></div><div class="cart-total" id="cartTotal"></div>
 <label for="buyerName">Your name</label><input id="buyerName" autocomplete="name" placeholder="Name">
 <label for="buyerEmail">Your email (for your copy)</label><input id="buyerEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
@@ -169,7 +169,7 @@ sort.addEventListener('change',render);
 render();
 </script>
 </body>
-</html>+total.toFixed(2),...(missing?['Plus '+missing+' item(s) with Value TBD — final total to be confirmed.']:[]),'','Shipping and handling costs will be determined later after consultation with Keith and are not included in this total.','This is a purchase request only. Please confirm availability, actual prices, shipping/handling and payment details before proceeding.'].join('\n');
+</html>+total.toFixed(2),...(missing?['Plus '+missing+' item(s) with Value TBD — final total to be confirmed.']:[]),'','Shipping and handling costs will be determined later after consultation with the owner and are not included in this total.','This is a purchase request only. Please confirm availability, actual prices, shipping/handling and payment details before proceeding.'].join('\n');
 const subject='Record purchase request — '+name+' ('+cart.length+' records)';
 const params=new URLSearchParams({cc:'peterbonos@gmail.com,'+email,subject,body});
 window.location.href='mailto:keithterry@crosspulse.com?'+params.toString();
