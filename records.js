@@ -1,22 +1,6 @@
 // Generated from the master Google Sheet. Genre assignments marked Other may need manual review.
 window.RECORDS = [
   {
-    "artist": "Steve Reich",
-    "title": "Drumming, Music for Mallet Instruments, Voices and Organ, Six Pianos",
-    "value": 127.01,
-    "sleeve": "VG",
-    "media": "NM",
-    "url": "https://www.discogs.com/release/249712-Steve-Reich-Drumming-Music-For-Mallet-Instruments-Voices-And-Organ-Six-Pianos",
-    "cover": "covers/249712.jpg",
-    "note": "",
-    "catalog": "",
-    "matrix": "",
-    "runout": "",
-    "genre": "Classical & Contemporary",
-    "year": null,
-    "featured": true
-  },
-  {
     "artist": "Pharaoh Sanders",
     "title": "Heart is a Melody",
     "value": 100,
@@ -45,22 +29,6 @@ window.RECORDS = [
     "matrix": "AS-9120-A / AS-9120-B",
     "runout": "",
     "genre": "Jazz",
-    "year": null,
-    "featured": true
-  },
-  {
-    "artist": "Eskimo Women's Music Of Povungnituk",
-    "title": "Inuit Throat And Harp Songs",
-    "value": 105,
-    "sleeve": "VG+",
-    "media": "VG",
-    "url": "https://www.discogs.com/release/2658300-Various-Inuit-Throat-And-Harp-Songs-Eskimo-Womens-Music-Of-Povungnituk",
-    "cover": "covers/2658300.jpg",
-    "note": "",
-    "catalog": "",
-    "matrix": "",
-    "runout": "",
-    "genre": "Other / To Be Classified",
     "year": null,
     "featured": true
   },
@@ -364,22 +332,6 @@ window.RECORDS = [
     "runout": "",
     "genre": "Classical & Contemporary",
     "year": null,
-    "featured": true
-  },
-  {
-    "artist": "Stevie Wonder",
-    "title": "Songs in the Key of Life",
-    "value": 40,
-    "sleeve": "VG",
-    "media": "VG",
-    "url": "https://www.discogs.com/release/4993840-Stevie-Wonder-Songs-In-The-Key-Of-Life",
-    "cover": "covers/4993840.jpg",
-    "note": "Missing 7\"",
-    "catalog": "T13-340C2",
-    "matrix": "2645-S / 2646-S / 2647-S / 2648-S / 2649-S / 2650-S",
-    "runout": "",
-    "genre": "Soul, Funk & R&B",
-    "year": 1976,
     "featured": true
   },
   {
@@ -1145,21 +1097,6 @@ window.RECORDS = [
     "featured": false
   },
   {
-    "artist": "Idjah Hadidjah",
-    "title": "Tonggeret",
-    "value": 20,
-    "sleeve": "VG+",
-    "media": "VG",
-    "url": "https://www.discogs.com/search/?q=Idjah+Hadidjah+Tonggeret+Nonesuch+9+79173-1&type=release",
-    "note": "1987 U.S. issue",
-    "catalog": "Nonesuch 9 79173-1",
-    "matrix": "",
-    "runout": "",
-    "genre": "World & Traditional",
-    "year": null,
-    "featured": false
-  },
-  {
     "artist": "Rufus Reid Trio",
     "title": "Perpetual Stroll",
     "value": 19.5,
@@ -1490,22 +1427,6 @@ window.RECORDS = [
     "matrix": "",
     "runout": "",
     "genre": "Jazz",
-    "year": null,
-    "featured": false
-  },
-  {
-    "artist": "Fred Raulston",
-    "title": "Uncharted Waters",
-    "value": 16,
-    "sleeve": "NM",
-    "media": "VG+",
-    "url": "https://www.discogs.com/release/5576399-Fred-Raulston-Uncharted-Waters",
-    "cover": "covers/5576399.jpg",
-    "note": "",
-    "catalog": "",
-    "matrix": "",
-    "runout": "",
-    "genre": "Other / To Be Classified",
     "year": null,
     "featured": false
   },
@@ -1920,22 +1841,6 @@ window.RECORDS = [
     "featured": false
   },
   {
-    "artist": "Fred Raulston",
-    "title": "Open Stream",
-    "value": 11.24,
-    "sleeve": "NM",
-    "media": "NM",
-    "url": "https://www.discogs.com/release/5576389-Fred-Raulston-Open-Stream",
-    "cover": "covers/5576389.jpg",
-    "note": "",
-    "catalog": "",
-    "matrix": "",
-    "runout": "",
-    "genre": "Other / To Be Classified",
-    "year": null,
-    "featured": false
-  },
-  {
     "artist": "Bishop Norman Williams",
     "title": "One for Bird",
     "value": 11,
@@ -2162,22 +2067,6 @@ window.RECORDS = [
     "media": "VG",
     "url": "https://www.discogs.com/release/14942368",
     "cover": "covers/14942368.jpg",
-    "note": "",
-    "catalog": "",
-    "matrix": "",
-    "runout": "",
-    "genre": "Jazz",
-    "year": null,
-    "featured": false
-  },
-  {
-    "artist": "Golden Rain - Music of Bali",
-    "title": "Ketjak: The Ramayana Monkey Chant",
-    "value": 9,
-    "sleeve": "VG",
-    "media": "VG+",
-    "url": "https://www.discogs.com/release/12101346-Various-Golden-Rain-Balinese-Gamelan-Music-Ketjak-The-Ramayana-Monkey-Chant",
-    "cover": "covers/12101346.jpg",
     "note": "",
     "catalog": "",
     "matrix": "",
@@ -4095,21 +3984,6 @@ window.RECORDS = [
     "featured": false
   },
   {
-    "artist": "Lancaster High School Concert and Stage Bands",
-    "title": "",
-    "value": null,
-    "sleeve": "",
-    "media": "",
-    "url": "",
-    "note": "Stereo; title/label not provided.",
-    "catalog": "352 39",
-    "matrix": "",
-    "runout": "",
-    "genre": "Other / To Be Classified",
-    "year": null,
-    "featured": false
-  },
-  {
     "artist": "The Mills Brothers",
     "title": "Yellowbird",
     "value": null,
@@ -4315,21 +4189,6 @@ window.RECORDS = [
     "catalog": "WM-01",
     "matrix": "",
     "runout": "3441 Sire 4 SR2 WM-01",
-    "genre": "Other / To Be Classified",
-    "year": null,
-    "featured": false
-  },
-  {
-    "artist": "Joint Effort",
-    "title": "Change / Hard Love Blues / Go On",
-    "value": null,
-    "sleeve": "",
-    "media": "VG",
-    "url": "https://www.discogs.com/search/?q=Joint+Effort+Change+%2F+Hard+Love+Blues+%2F+Go+On+Master+Reference&type=release",
-    "note": "Dick McGrew Recording Service master reference recording; handwritten label.",
-    "catalog": "Master Reference",
-    "matrix": "",
-    "runout": "",
     "genre": "Other / To Be Classified",
     "year": null,
     "featured": false
